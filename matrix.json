@@ -1,0 +1,22 @@
+{
+  "variants": [
+    {
+      "artifact-name": "name1",
+      "enabled": true,
+      "llm-type": "ollama_granite",
+      "test-group": "tasks"
+    },
+    {
+      "artifact-name": "name2",
+      "enabled": true,
+      "llm-type": "ollama_granite",
+      "test-group": "tasks"
+    },
+    {
+      "artifact-name": "name2",
+      "enabled": false,
+      "llm-type": "ollama_granite",
+      "test-group": "tasks"
+    }
+  ]
+}
