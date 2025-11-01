@@ -26,11 +26,11 @@ jobs:
 
   Koog:
     needs: prepare_matrix
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.variants.runs-on }}
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.prepare_matrix.outputs.matrix) }}
-    name: Koog ${{ matrix.variants.artifact-name }}
+    name: ${{ matrix.variants.artifact-name }} ${{ matrix.variants.runs-on }}
     steps:
 
       - uses: actions/checkout@v5
@@ -49,7 +49,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v5
         with:
-          name: reports-${{ matrix.variants.artifact-name }}
+          name: reports-${{ matrix.variants.artifact-name }}-${{ matrix.variants.runs-on }}
           path: |
             **/build/reports/
           retention-days: 7

@@ -1,17 +1,32 @@
 {
   "variants": [
     {
-      "artifact-name": "KoogTextPromptTest",
+      "artifact-name": "Text",
+      "runs-on": "ubuntu-latest",
       "enabled": true,
       "test-group": "KoogTextPromptTest"
     },
     {
-      "artifact-name": "KoogImagePromptTest",
-      "enabled": false,
+      "artifact-name": "Text",
+      "runs-on": "ubuntu-24.04-arm",
+      "enabled": true,
+      "test-group": "KoogTextPromptTest"
+    },
+    {
+      "artifact-name": "Image",
+      "runs-on": "ubuntu-latest",
+      "enabled": true,
       "test-group": "KoogImagePromptTest"
     },
     {
-      "artifact-name": "NewTest",
+      "artifact-name": "Image",
+      "runs-on": "ubuntu-24.04-arm",
+      "enabled": true,
+      "test-group": "KoogImagePromptTest"
+    },
+    {
+      "artifact-name": "New",
+      "runs-on": "ubuntu-latest",
       "enabled": false,
       "test-group": "NewTest"
     }
