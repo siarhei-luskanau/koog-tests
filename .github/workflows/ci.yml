@@ -1,0 +1,55 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  JAVA_VERSION: 21
+  JAVA_DISTRIBUTION: 'temurin'
+
+jobs:
+  prepare_matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set_matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v5
+      - id: set_matrix
+        run: echo "matrix=$(jq -c . < ./matrix.json)" >> $GITHUB_OUTPUT
+
+
+
+  Koog:
+    needs: prepare_matrix
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.prepare_matrix.outputs.matrix) }}
+    name: Koog ${{ matrix.variants.artifact-name }}
+    steps:
+
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+
+      - uses: gradle/actions/setup-gradle@v5
+
+      - run: ./gradlew test --tests "${{ matrix.variants.test-group }}" --stacktrace
+        if: ${{ matrix.variants.enabled }}
+
+      - name: Collect reports
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: reports-${{ matrix.variants.artifact-name }}
+          path: |
+            **/build/reports/
+          retention-days: 7

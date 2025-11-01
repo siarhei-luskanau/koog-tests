@@ -1,0 +1,19 @@
+{
+  "variants": [
+    {
+      "artifact-name": "KoogTextPromptTest",
+      "enabled": true,
+      "test-group": "KoogTextPromptTest"
+    },
+    {
+      "artifact-name": "KoogImagePromptTest",
+      "enabled": false,
+      "test-group": "KoogImagePromptTest"
+    },
+    {
+      "artifact-name": "NewTest",
+      "enabled": false,
+      "test-group": "NewTest"
+    }
+  ]
+}
