@@ -1,9 +1,6 @@
 import ai.koog.prompt.dsl.prompt
 import ai.koog.prompt.executor.llms.SingleLLMPromptExecutor
 import ai.koog.prompt.executor.ollama.client.OllamaClient
-import ai.koog.prompt.llm.LLMCapability
-import ai.koog.prompt.llm.LLMProvider
-import ai.koog.prompt.llm.LLModel
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertContains
@@ -23,18 +20,7 @@ class KoogTextPromptTest : BaseContainerTest() {
 
             println("KoogTest: creating LLMClient ...")
             val llmClient = OllamaClient(baseUrl = baseUrl)
-            val model =
-                LLModel(
-                    provider = LLMProvider.Ollama,
-                    id = System.getProperty("ollama-model-id"),
-                    capabilities =
-                        listOf(
-                            LLMCapability.Temperature,
-                            LLMCapability.Schema.JSON.Standard,
-                            LLMCapability.Tools,
-                        ),
-                    contextLength = 16_384,
-                )
+            val model = findModel(System.getProperty("ollama-model-id"))
             llmClient.getModelOrNull(model.id, pullIfMissing = true)
 
             val promptExecutor = SingleLLMPromptExecutor(llmClient)
