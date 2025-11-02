@@ -40,9 +40,8 @@ class KoogGuardPromptTest : BaseContainerTest() {
 
             assertContains(
                 response.content,
-                other = "Unsafe",
-                ignoreCase = true,
-                message = "Result should contain Unsafe",
+                regex = Regex("(?:Unsafe|Yes)"),
+                message = "Result should contain Unsafe or Yes",
             )
         }
 }

@@ -93,6 +93,16 @@ open class BaseContainerTest {
                         ),
                     contextLength = 32_768,
                 )
+            "granite3-guardian:latest" ->
+                LLModel(
+                    provider = LLMProvider.Ollama,
+                    id = id,
+                    capabilities =
+                        listOf(
+                            LLMCapability.Moderation,
+                        ),
+                    contextLength = 8 * 1024,
+                )
             else -> throw IllegalArgumentException("Model $id not found")
         }
 

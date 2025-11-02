@@ -47,6 +47,7 @@ tasks.register("ciJobsMatrixSetup") {
                     "Guard",
                     "KoogGuardPromptTest",
                     listOf(
+                        "granite3-guardian:latest", // https://ollama.com/library/granite3-guardian
                         "llama-guard3:latest", // https://ollama.com/library/llama-guard3
                     ),
                 ),

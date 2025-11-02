@@ -67,6 +67,13 @@
       "artifact-name": "Guard",
       "runs-on": "ubuntu-latest",
       "enabled": true,
+      "ollama-model-id": "granite3-guardian:latest",
+      "test-group": "KoogGuardPromptTest"
+    },
+    {
+      "artifact-name": "Guard",
+      "runs-on": "ubuntu-latest",
+      "enabled": true,
       "ollama-model-id": "llama-guard3:latest",
       "test-group": "KoogGuardPromptTest"
     }
