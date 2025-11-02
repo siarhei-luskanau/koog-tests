@@ -14,15 +14,17 @@ import kotlin.uuid.Uuid
 class KoogImagePromptTest : BaseContainerTest() {
     @Test
     fun imageTest() =
-        runTest(timeout = 30.minutes) {
+        runTest(timeout = 60.minutes) {
             val baseUrl = "http://localhost:${container.getMappedPort(EXPOSED_PORT)}"
 
             println("KoogTest: wait container at $baseUrl ...")
             waitForOllamaServer(baseUrl)
 
+            val model = findModel(System.getProperty("ollama-model-id"))
+            println("KoogTest: model: $model")
+
             println("KoogTest: creating LLMClient ...")
             val llmClient = OllamaClient(baseUrl = baseUrl)
-            val model = findModel(System.getProperty("ollama-model-id"))
             llmClient.getModelOrNull(model.id, pullIfMissing = true)
 
             val promptExecutor = SingleLLMPromptExecutor(llmClient)

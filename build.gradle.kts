@@ -78,7 +78,7 @@ tasks.register("devRunMatrix") {
                 .sortedBy { it.testGroup + it.ollamaModelId }
                 .distinctBy { it.testGroup + it.ollamaModelId }
 
-        println("variants: $variants")
+        println("variants: ${variants.joinToString(prefix = "[\n", separator = "\n", postfix = "\n]")}")
         variants.forEach { variant ->
             println("variant: $variant")
             runCatching {

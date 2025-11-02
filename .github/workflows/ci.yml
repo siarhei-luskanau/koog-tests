@@ -28,7 +28,7 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v5
 
-      - run: ./gradlew ciJobsMatrixSetup --stacktrace
+      # - run: ./gradlew ciJobsMatrixSetup --stacktrace
 
       - id: set_matrix
         run: echo "matrix=$(jq -c . < ./matrix.json)" >> $GITHUB_OUTPUT
