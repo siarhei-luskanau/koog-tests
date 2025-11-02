@@ -1,5 +1,8 @@
 rootProject.name = "KoogTests"
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+include(":ollama")
+
 pluginManagement {
     repositories {
         google {

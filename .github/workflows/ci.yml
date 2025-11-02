@@ -42,7 +42,7 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v5
 
-      - run: ./gradlew test --tests "${{ matrix.variants.test-group }}" --stacktrace
+      - run: ./gradlew :ollama:test --tests "${{ matrix.variants.test-group }}" --stacktrace
         if: ${{ matrix.variants.enabled }}
 
       - name: Collect reports
