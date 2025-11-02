@@ -55,11 +55,8 @@ open class BaseContainerTest {
     protected fun findModel(id: String): LLModel =
         when (id) {
             OllamaModels.Groq.LLAMA_3_GROK_TOOL_USE_8B.id -> OllamaModels.Groq.LLAMA_3_GROK_TOOL_USE_8B
-            OllamaModels.Groq.LLAMA_3_GROK_TOOL_USE_70B.id -> OllamaModels.Groq.LLAMA_3_GROK_TOOL_USE_70B
             OllamaModels.Meta.LLAMA_3_2_3B.id -> OllamaModels.Meta.LLAMA_3_2_3B
             OllamaModels.Meta.LLAMA_3_2.id -> OllamaModels.Meta.LLAMA_3_2
-            OllamaModels.Meta.LLAMA_4_SCOUT.id -> OllamaModels.Meta.LLAMA_4_SCOUT
-            OllamaModels.Meta.LLAMA_4.id -> OllamaModels.Meta.LLAMA_4
             OllamaModels.Meta.LLAMA_GUARD_3.id -> OllamaModels.Meta.LLAMA_GUARD_3
             OllamaModels.Alibaba.QWEN_2_5_05B.id -> OllamaModels.Alibaba.QWEN_2_5_05B
             OllamaModels.Alibaba.QWEN_3_06B.id -> OllamaModels.Alibaba.QWEN_3_06B
@@ -95,6 +92,16 @@ open class BaseContainerTest {
                             LLMCapability.Document,
                         ),
                     contextLength = 32_768,
+                )
+            "granite3-guardian:latest" ->
+                LLModel(
+                    provider = LLMProvider.Ollama,
+                    id = id,
+                    capabilities =
+                        listOf(
+                            LLMCapability.Moderation,
+                        ),
+                    contextLength = 8 * 1024,
                 )
             else -> throw IllegalArgumentException("Model $id not found")
         }

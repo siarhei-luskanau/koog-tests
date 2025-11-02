@@ -21,12 +21,12 @@ tasks.register("ciJobsMatrixSetup") {
                     "KoogTextPromptTest",
                     listOf(
                         // "gpt-oss:20b", // https://ollama.com/library/gpt-oss
-                        "llama3-groq-tool-use:8b",
-                        "llama3.2:3b",
-                        "llama3.2:latest",
-                        "qwen2.5:0.5b",
-                        "qwen3:0.6b",
-                        "granite3.2-vision",
+                        "granite3.2-vision", // https://ollama.com/library/granite3.2-vision
+                        "llama3-groq-tool-use:8b", // https://ollama.com/library/llama3-groq-tool-use
+                        "llama3.2:3b", // https://ollama.com/library/llama3.2
+                        "llama3.2:latest", // https://ollama.com/library/llama3.2
+                        "qwen2.5:0.5b", // https://ollama.com/library/qwen2
+                        "qwen3:0.6b", // https://ollama.com/library/qwen3
                     ),
                 ),
                 Triple(
@@ -41,6 +41,14 @@ tasks.register("ciJobsMatrixSetup") {
                         // https://ollama.com/library/gemma3
                         "granite3.2-vision", // https://ollama.com/library/granite3.2-vision
                         // https://ollama.com/library/llama3.2-vision
+                    ),
+                ),
+                Triple(
+                    "Guard",
+                    "KoogGuardPromptTest",
+                    listOf(
+                        "granite3-guardian:latest", // https://ollama.com/library/granite3-guardian
+                        "llama-guard3:latest", // https://ollama.com/library/llama-guard3
                     ),
                 ),
             )

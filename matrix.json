@@ -4,6 +4,13 @@
       "artifact-name": "Text",
       "runs-on": "ubuntu-latest",
       "enabled": true,
+      "ollama-model-id": "granite3.2-vision",
+      "test-group": "KoogTextPromptTest"
+    },
+    {
+      "artifact-name": "Text",
+      "runs-on": "ubuntu-latest",
+      "enabled": true,
       "ollama-model-id": "llama3-groq-tool-use:8b",
       "test-group": "KoogTextPromptTest"
     },
@@ -36,13 +43,6 @@
       "test-group": "KoogTextPromptTest"
     },
     {
-      "artifact-name": "Text",
-      "runs-on": "ubuntu-latest",
-      "enabled": true,
-      "ollama-model-id": "granite3.2-vision",
-      "test-group": "KoogTextPromptTest"
-    },
-    {
       "artifact-name": "Image",
       "runs-on": "ubuntu-latest",
       "enabled": true,
@@ -62,6 +62,20 @@
       "enabled": true,
       "ollama-model-id": "granite3.2-vision",
       "test-group": "KoogImagePromptTest"
+    },
+    {
+      "artifact-name": "Guard",
+      "runs-on": "ubuntu-latest",
+      "enabled": true,
+      "ollama-model-id": "granite3-guardian:latest",
+      "test-group": "KoogGuardPromptTest"
+    },
+    {
+      "artifact-name": "Guard",
+      "runs-on": "ubuntu-latest",
+      "enabled": true,
+      "ollama-model-id": "llama-guard3:latest",
+      "test-group": "KoogGuardPromptTest"
     }
   ]
 }
