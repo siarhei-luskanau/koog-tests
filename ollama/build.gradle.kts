@@ -25,4 +25,5 @@ dependencies {
 
 tasks.withType<Test> {
     systemProperty("project.root.dir", rootDir.absolutePath)
+    systemProperty("ollama-model-id", System.getProperty("ollama-model-id"))
 }

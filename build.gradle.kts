@@ -15,30 +15,23 @@ tasks.register("devRunMatrix") {
     group = CI_GRADLE
     val injected = project.objects.newInstance<Injected>()
     doLast {
-        val testGroupList: List<String> =
-            project.file("matrix.json").let { matrixFile ->
-                val type = object : TypeToken<Map<String, List<Map<String, Any>>>>() {}.type
-                val matrix: Map<String, List<Map<String, Any>>> = Gson().fromJson(matrixFile.reader(), type)
-                matrix["variants"]
-                    ?.filter { variant -> variant["enabled"] == true }
-                    ?.map { variant -> variant["test-group"] as String }
-                    ?.sorted()
-                    ?.distinct()
-                    .orEmpty()
-            }
+        val variants =
+            Gson()
+                .fromJson(project.file("matrix.json").readText(), MatrixModel::class.java)
+                .variants
+                .filter { it.enabled }
+                .sortedBy { it.testGroup + it.ollamaModelId }
+                .distinctBy { it.testGroup + it.ollamaModelId }
 
-        println("testGroupList: $testGroupList")
-        testGroupList.forEach { testGroup ->
-            println("testGroup: $testGroup")
-            injected.gradlew(":ollama:test", "--tests", testGroup)
+        println("variants: $variants")
+        variants.forEach { variant ->
+            println("variant: $variant")
+            injected.gradlew(":ollama:test", "-Dollama-model-id=${variant.ollamaModelId}", "--tests", variant.testGroup)
         }
     }
 }
 
 abstract class Injected {
-    @get:Inject
-    abstract val fs: FileSystemOperations
-
     @get:Inject
     abstract val execOperations: ExecOperations
 

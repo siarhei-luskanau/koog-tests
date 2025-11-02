@@ -1,4 +1,3 @@
-import BaseContainerTest.Companion.EXPOSED_PORT
 import ai.koog.prompt.dsl.prompt
 import ai.koog.prompt.executor.llms.SingleLLMPromptExecutor
 import ai.koog.prompt.executor.ollama.client.OllamaClient
