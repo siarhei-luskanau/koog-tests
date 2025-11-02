@@ -1,7 +1,7 @@
 @file:Suppress("PropertyName")
 
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import com.google.gson.GsonBuilder
 import org.apache.tools.ant.taskdefs.condition.Os
 import java.util.Properties
 
@@ -11,10 +11,65 @@ allprojects {
 
 val CI_GRADLE = "CI_GRADLE"
 
+tasks.register("ciJobsMatrixSetup") {
+    group = CI_GRADLE
+    doLast {
+        val groups: List<Triple<String, String, List<String>>> =
+            listOf(
+                Triple(
+                    "Text",
+                    "KoogTextPromptTest",
+                    listOf(
+                        "llama3-groq-tool-use:8b",
+                        // "llama3-groq-tool-use:70b",
+                        "llama3.2:3b",
+                        "llama3.2:latest",
+                        // "llama4:latest",
+                        // "llama-guard3:latest",
+                        "qwen2.5:0.5b",
+                        "qwen3:0.6b",
+                        // "qwq:32b",
+                        // "qwen2.5-coder:32b",
+                        "granite3.2-vision",
+                    ),
+                ),
+                Triple(
+                    "Image",
+                    "KoogImagePromptTest",
+                    listOf(
+                        "granite3.2-vision",
+                    ),
+                ),
+            )
+        val variants = mutableListOf<Variant>()
+        groups.forEach { (name, group, models) ->
+            models.forEach { modelId ->
+                variants.add(
+                    Variant(
+                        artifactName = name,
+                        runsOn = "ubuntu-latest",
+                        enabled = true,
+                        ollamaModelId = modelId,
+                        testGroup = group,
+                    ),
+                )
+            }
+        }
+        val jsonText =
+            GsonBuilder()
+                .apply { setPrettyPrinting() }
+                .create()
+                .toJson(MatrixModel(variants = variants))
+        File(rootProject.layout.projectDirectory.asFile, "matrix.json").writeText(jsonText)
+    }
+}
+
 tasks.register("devRunMatrix") {
     group = CI_GRADLE
     val injected = project.objects.newInstance<Injected>()
     doLast {
+        injected.gradlew("ktlintFormat")
+        injected.gradlew("ciJobsMatrixSetup")
         val variants =
             Gson()
                 .fromJson(project.file("matrix.json").readText(), MatrixModel::class.java)
@@ -26,7 +81,18 @@ tasks.register("devRunMatrix") {
         println("variants: $variants")
         variants.forEach { variant ->
             println("variant: $variant")
-            injected.gradlew(":ollama:test", "-Dollama-model-id=${variant.ollamaModelId}", "--tests", variant.testGroup)
+            runCatching {
+                injected.gradlew(
+                    ":ollama:test",
+                    "-Dollama-model-id=${variant.ollamaModelId}",
+                    "--tests",
+                    variant.testGroup,
+                )
+            }.onFailure {
+                println("Failure variant: $variant")
+                it.printStackTrace()
+                throw it
+            }
         }
     }
 }

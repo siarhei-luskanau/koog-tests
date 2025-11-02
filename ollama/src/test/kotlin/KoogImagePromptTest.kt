@@ -1,7 +1,6 @@
 import ai.koog.prompt.dsl.prompt
 import ai.koog.prompt.executor.llms.SingleLLMPromptExecutor
 import ai.koog.prompt.executor.ollama.client.OllamaClient
-import ai.koog.prompt.llm.OllamaModels
 import ai.koog.prompt.message.AttachmentContent
 import ai.koog.prompt.message.ContentPart
 import kotlinx.coroutines.test.runTest
@@ -23,7 +22,7 @@ class KoogImagePromptTest : BaseContainerTest() {
 
             println("KoogTest: creating LLMClient ...")
             val llmClient = OllamaClient(baseUrl = baseUrl)
-            val model = OllamaModels.Granite.GRANITE_3_2_VISION
+            val model = findModel(System.getProperty("ollama-model-id"))
             llmClient.getModelOrNull(model.id, pullIfMissing = true)
 
             val promptExecutor = SingleLLMPromptExecutor(llmClient)

@@ -1,3 +1,5 @@
+import ai.koog.prompt.llm.LLModel
+import ai.koog.prompt.llm.OllamaModels
 import com.github.dockerjava.api.model.Bind
 import com.github.dockerjava.api.model.Volume
 import io.ktor.client.HttpClient
@@ -46,6 +48,23 @@ open class BaseContainerTest {
     fun teardown() {
         container.stop()
     }
+
+    protected fun findModel(id: String): LLModel =
+        listOf(
+            OllamaModels.Groq.LLAMA_3_GROK_TOOL_USE_8B,
+            OllamaModels.Groq.LLAMA_3_GROK_TOOL_USE_70B,
+            OllamaModels.Meta.LLAMA_3_2_3B,
+            OllamaModels.Meta.LLAMA_3_2,
+            OllamaModels.Meta.LLAMA_4_SCOUT,
+            OllamaModels.Meta.LLAMA_4,
+            OllamaModels.Meta.LLAMA_GUARD_3,
+            OllamaModels.Alibaba.QWEN_2_5_05B,
+            OllamaModels.Alibaba.QWEN_3_06B,
+            OllamaModels.Alibaba.QWQ_32B,
+            OllamaModels.Alibaba.QWQ,
+            OllamaModels.Alibaba.QWEN_CODER_2_5_32B,
+            OllamaModels.Granite.GRANITE_3_2_VISION,
+        ).find { it.id == id } ?: throw IllegalArgumentException("Model $id not found")
 
     protected fun waitForOllamaServer(baseUrl: String) {
         val httpClient =
