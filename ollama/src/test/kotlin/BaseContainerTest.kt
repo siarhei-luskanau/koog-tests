@@ -1,3 +1,5 @@
+import ai.koog.prompt.llm.LLMCapability
+import ai.koog.prompt.llm.LLMProvider
 import ai.koog.prompt.llm.LLModel
 import ai.koog.prompt.llm.OllamaModels
 import com.github.dockerjava.api.model.Bind
@@ -26,6 +28,7 @@ open class BaseContainerTest {
                         withMemory(4L * 1024 * 1024 * 1024) // 4GB RAM
                         withCpuCount(2L)
                     } else {
+                        withMemory((13.3 * 1024 * 1024 * 1024).toLong()) // 13.3GB RAM
                         val path =
                             System.getProperty("project.root.dir", ".") +
                                 File.separator + ".ollama"
@@ -50,21 +53,51 @@ open class BaseContainerTest {
     }
 
     protected fun findModel(id: String): LLModel =
-        listOf(
-            OllamaModels.Groq.LLAMA_3_GROK_TOOL_USE_8B,
-            OllamaModels.Groq.LLAMA_3_GROK_TOOL_USE_70B,
-            OllamaModels.Meta.LLAMA_3_2_3B,
-            OllamaModels.Meta.LLAMA_3_2,
-            OllamaModels.Meta.LLAMA_4_SCOUT,
-            OllamaModels.Meta.LLAMA_4,
-            OllamaModels.Meta.LLAMA_GUARD_3,
-            OllamaModels.Alibaba.QWEN_2_5_05B,
-            OllamaModels.Alibaba.QWEN_3_06B,
-            OllamaModels.Alibaba.QWQ_32B,
-            OllamaModels.Alibaba.QWQ,
-            OllamaModels.Alibaba.QWEN_CODER_2_5_32B,
-            OllamaModels.Granite.GRANITE_3_2_VISION,
-        ).find { it.id == id } ?: throw IllegalArgumentException("Model $id not found")
+        when (id) {
+            OllamaModels.Groq.LLAMA_3_GROK_TOOL_USE_8B.id -> OllamaModels.Groq.LLAMA_3_GROK_TOOL_USE_8B
+            OllamaModels.Groq.LLAMA_3_GROK_TOOL_USE_70B.id -> OllamaModels.Groq.LLAMA_3_GROK_TOOL_USE_70B
+            OllamaModels.Meta.LLAMA_3_2_3B.id -> OllamaModels.Meta.LLAMA_3_2_3B
+            OllamaModels.Meta.LLAMA_3_2.id -> OllamaModels.Meta.LLAMA_3_2
+            OllamaModels.Meta.LLAMA_4_SCOUT.id -> OllamaModels.Meta.LLAMA_4_SCOUT
+            OllamaModels.Meta.LLAMA_4.id -> OllamaModels.Meta.LLAMA_4
+            OllamaModels.Meta.LLAMA_GUARD_3.id -> OllamaModels.Meta.LLAMA_GUARD_3
+            OllamaModels.Alibaba.QWEN_2_5_05B.id -> OllamaModels.Alibaba.QWEN_2_5_05B
+            OllamaModels.Alibaba.QWEN_3_06B.id -> OllamaModels.Alibaba.QWEN_3_06B
+            OllamaModels.Alibaba.QWQ_32B.id -> OllamaModels.Alibaba.QWQ_32B
+            OllamaModels.Alibaba.QWQ.id -> OllamaModels.Alibaba.QWQ
+            OllamaModels.Alibaba.QWEN_CODER_2_5_32B.id -> OllamaModels.Alibaba.QWEN_CODER_2_5_32B
+            OllamaModels.Granite.GRANITE_3_2_VISION.id -> OllamaModels.Granite.GRANITE_3_2_VISION
+            "gpt-oss:20b" ->
+                LLModel(
+                    provider = LLMProvider.Ollama,
+                    id = id,
+                    capabilities =
+                        listOf(
+                            LLMCapability.Completion,
+                            LLMCapability.Schema.JSON.Standard,
+                            LLMCapability.Speculation,
+                            LLMCapability.Temperature,
+                            LLMCapability.ToolChoice,
+                            LLMCapability.Tools,
+                        ),
+                    contextLength = 200_000,
+                )
+            "qwen3-vl:4b", "qwen2.5vl:3b" ->
+                LLModel(
+                    provider = LLMProvider.Ollama,
+                    id = id,
+                    capabilities =
+                        listOf(
+                            LLMCapability.Temperature,
+                            LLMCapability.Schema.JSON.Basic,
+                            LLMCapability.Tools,
+                            LLMCapability.Vision.Image,
+                            LLMCapability.Document,
+                        ),
+                    contextLength = 32_768,
+                )
+            else -> throw IllegalArgumentException("Model $id not found")
+        }
 
     protected fun waitForOllamaServer(baseUrl: String) {
         val httpClient =

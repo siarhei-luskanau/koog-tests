@@ -20,16 +20,12 @@ tasks.register("ciJobsMatrixSetup") {
                     "Text",
                     "KoogTextPromptTest",
                     listOf(
+                        // "gpt-oss:20b", // https://ollama.com/library/gpt-oss
                         "llama3-groq-tool-use:8b",
-                        // "llama3-groq-tool-use:70b",
                         "llama3.2:3b",
                         "llama3.2:latest",
-                        // "llama4:latest",
-                        // "llama-guard3:latest",
                         "qwen2.5:0.5b",
                         "qwen3:0.6b",
-                        // "qwq:32b",
-                        // "qwen2.5-coder:32b",
                         "granite3.2-vision",
                     ),
                 ),
@@ -37,7 +33,14 @@ tasks.register("ciJobsMatrixSetup") {
                     "Image",
                     "KoogImagePromptTest",
                     listOf(
-                        "granite3.2-vision",
+                        "qwen3-vl:4b", // https://ollama.com/library/qwen3-vl
+                        // https://ollama.com/library/mistral-small3.2
+                        "qwen2.5vl:3b", // https://ollama.com/library/qwen2.5vl
+                        // https://ollama.com/library/mistral-small3.1
+                        // https://ollama.com/library/llama4
+                        // https://ollama.com/library/gemma3
+                        "granite3.2-vision", // https://ollama.com/library/granite3.2-vision
+                        // https://ollama.com/library/llama3.2-vision
                     ),
                 ),
             )
