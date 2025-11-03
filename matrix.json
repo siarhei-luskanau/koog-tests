@@ -39,6 +39,13 @@
       "artifact-name": "Text",
       "runs-on": "ubuntu-latest",
       "enabled": true,
+      "ollama-model-id": "qwen2.5-coder:3b",
+      "test-group": "KoogTextPromptTest"
+    },
+    {
+      "artifact-name": "Text",
+      "runs-on": "ubuntu-latest",
+      "enabled": true,
       "ollama-model-id": "qwen2.5:0.5b",
       "test-group": "KoogTextPromptTest"
     },
@@ -53,7 +60,7 @@
       "artifact-name": "Image",
       "runs-on": "ubuntu-latest",
       "enabled": true,
-      "ollama-model-id": "qwen3-vl:4b",
+      "ollama-model-id": "granite3.2-vision",
       "test-group": "KoogImagePromptTest"
     },
     {
@@ -67,7 +74,14 @@
       "artifact-name": "Image",
       "runs-on": "ubuntu-latest",
       "enabled": true,
-      "ollama-model-id": "granite3.2-vision",
+      "ollama-model-id": "qwen3-vl:4b",
+      "test-group": "KoogImagePromptTest"
+    },
+    {
+      "artifact-name": "Image",
+      "runs-on": "ubuntu-latest",
+      "enabled": true,
+      "ollama-model-id": "gemma3:4b",
       "test-group": "KoogImagePromptTest"
     },
     {
