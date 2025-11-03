@@ -62,7 +62,6 @@ open class BaseContainerTest {
             OllamaModels.Alibaba.QWEN_3_06B.id -> OllamaModels.Alibaba.QWEN_3_06B
             OllamaModels.Alibaba.QWQ_32B.id -> OllamaModels.Alibaba.QWQ_32B
             OllamaModels.Alibaba.QWQ.id -> OllamaModels.Alibaba.QWQ
-            OllamaModels.Alibaba.QWEN_CODER_2_5_32B.id -> OllamaModels.Alibaba.QWEN_CODER_2_5_32B
             OllamaModels.Granite.GRANITE_3_2_VISION.id -> OllamaModels.Granite.GRANITE_3_2_VISION
             "gpt-oss:20b" ->
                 LLModel(
@@ -79,7 +78,8 @@ open class BaseContainerTest {
                         ),
                     contextLength = 200_000,
                 )
-            "qwen3-vl:4b", "qwen2.5vl:3b" ->
+            "qwen2.5-coder:3b" -> OllamaModels.Alibaba.QWEN_CODER_2_5_32B.copy(id = id, contextLength = 3 * 1024)
+            "qwen3-vl:4b", "qwen2.5vl:3b", "gemma3:4b" ->
                 LLModel(
                     provider = LLMProvider.Ollama,
                     id = id,
@@ -91,7 +91,7 @@ open class BaseContainerTest {
                             LLMCapability.Vision.Image,
                             LLMCapability.Document,
                         ),
-                    contextLength = 32_768,
+                    contextLength = 32 * 1024,
                 )
             "granite3-guardian:latest" ->
                 LLModel(

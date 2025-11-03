@@ -25,6 +25,7 @@ tasks.register("ciJobsMatrixSetup") {
                         "llama3-groq-tool-use:8b", // https://ollama.com/library/llama3-groq-tool-use
                         "llama3.2:3b", // https://ollama.com/library/llama3.2
                         "llama3.2:latest", // https://ollama.com/library/llama3.2
+                        "qwen2.5-coder:3b", // https://ollama.com/library/qwen2.5-coder
                         "qwen2.5:0.5b", // https://ollama.com/library/qwen2
                         "qwen3:0.6b", // https://ollama.com/library/qwen3
                     ),
@@ -33,14 +34,14 @@ tasks.register("ciJobsMatrixSetup") {
                     "Image",
                     "KoogImagePromptTest",
                     listOf(
-                        "qwen3-vl:4b", // https://ollama.com/library/qwen3-vl
-                        // https://ollama.com/library/mistral-small3.2
-                        "qwen2.5vl:3b", // https://ollama.com/library/qwen2.5vl
-                        // https://ollama.com/library/mistral-small3.1
-                        // https://ollama.com/library/llama4
-                        // https://ollama.com/library/gemma3
                         "granite3.2-vision", // https://ollama.com/library/granite3.2-vision
-                        // https://ollama.com/library/llama3.2-vision
+                        "qwen2.5vl:3b", // https://ollama.com/library/qwen2.5vl
+                        "qwen3-vl:4b", // https://ollama.com/library/qwen3-vl
+                        "gemma3:4b", // https://ollama.com/library/gemma3
+                        // "llama3.2-vision" // https://ollama.com/library/llama3.2-vision
+                        // "llama4" // https://ollama.com/library/llama4
+                        // "mistral-small3.1" // https://ollama.com/library/mistral-small3.1
+                        // "mistral-small3.2" // https://ollama.com/library/mistral-small3.2
                     ),
                 ),
                 Triple(
