@@ -20,7 +20,7 @@ tasks.register("ciJobsMatrixSetup") {
                     "Text",
                     "KoogTextPromptTest",
                     listOf(
-                        // "gpt-oss:20b", // https://ollama.com/library/gpt-oss
+                        "gpt-oss:20b", // https://ollama.com/library/gpt-oss
                         "granite3.2-vision", // https://ollama.com/library/granite3.2-vision
                         "llama3-groq-tool-use:8b", // https://ollama.com/library/llama3-groq-tool-use
                         "llama3.2:3b", // https://ollama.com/library/llama3.2

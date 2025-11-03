@@ -4,6 +4,13 @@
       "artifact-name": "Text",
       "runs-on": "ubuntu-latest",
       "enabled": true,
+      "ollama-model-id": "gpt-oss:20b",
+      "test-group": "KoogTextPromptTest"
+    },
+    {
+      "artifact-name": "Text",
+      "runs-on": "ubuntu-latest",
+      "enabled": true,
       "ollama-model-id": "granite3.2-vision",
       "test-group": "KoogTextPromptTest"
     },

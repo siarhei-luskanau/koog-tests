@@ -22,13 +22,13 @@ open class BaseContainerTest {
             withExposedPorts(EXPOSED_PORT)
             withCreateContainerCmdModifier { cmd ->
                 cmd.hostConfig?.apply {
+                    // "gpt-oss:20b" model requires 13.1GB RAM
+                    withMemory((13.3 * 1024 * 1024 * 1024).toLong()) // 13.3GB RAM
                     val isCi =
                         true.toString().equals(other = System.getenv("CI"), ignoreCase = true)
                     if (isCi) {
-                        withMemory(4L * 1024 * 1024 * 1024) // 4GB RAM
                         withCpuCount(2L)
                     } else {
-                        withMemory((13.3 * 1024 * 1024 * 1024).toLong()) // 13.3GB RAM
                         val path =
                             System.getProperty("project.root.dir", ".") +
                                 File.separator + ".ollama"
