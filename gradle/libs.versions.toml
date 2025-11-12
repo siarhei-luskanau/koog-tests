@@ -2,7 +2,7 @@
 
 build-jvmTarget = "21"
 gson = "2.13.2"
-koog = "0.5.2"
+koog = "0.5.3"
 kotlin = "2.2.21"
 kotlinx-coroutines = "1.10.2"
 kotlinx-datetime = "0.7.1-0.6.x-compat"
