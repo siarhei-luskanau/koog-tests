@@ -19,7 +19,6 @@ import kotlin.test.BeforeTest
 open class BaseContainerTest {
     protected val container by lazy {
         OllamaContainer("ollama/ollama:latest").apply {
-            withExposedPorts(EXPOSED_PORT)
             withCreateContainerCmdModifier { cmd ->
                 cmd.hostConfig?.apply {
                     // "gpt-oss:20b" model requires 13.1GB RAM
@@ -175,9 +174,5 @@ open class BaseContainerTest {
                 delay(1000)
             }
         }
-    }
-
-    companion object {
-        const val EXPOSED_PORT = 11434
     }
 }
