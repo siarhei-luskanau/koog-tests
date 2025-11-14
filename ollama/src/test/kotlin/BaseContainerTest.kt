@@ -54,16 +54,43 @@ open class BaseContainerTest {
 
     protected fun findModel(id: String): LLModel =
         when (id) {
-            OllamaModels.Groq.LLAMA_3_GROK_TOOL_USE_8B.id -> OllamaModels.Groq.LLAMA_3_GROK_TOOL_USE_8B
-            OllamaModels.Meta.LLAMA_3_2_3B.id -> OllamaModels.Meta.LLAMA_3_2_3B
-            OllamaModels.Meta.LLAMA_3_2.id -> OllamaModels.Meta.LLAMA_3_2
-            OllamaModels.Meta.LLAMA_GUARD_3.id -> OllamaModels.Meta.LLAMA_GUARD_3
-            OllamaModels.Alibaba.QWEN_2_5_05B.id -> OllamaModels.Alibaba.QWEN_2_5_05B
-            OllamaModels.Alibaba.QWEN_3_06B.id -> OllamaModels.Alibaba.QWEN_3_06B
-            OllamaModels.Alibaba.QWQ_32B.id -> OllamaModels.Alibaba.QWQ_32B
-            OllamaModels.Alibaba.QWQ.id -> OllamaModels.Alibaba.QWQ
-            OllamaModels.Granite.GRANITE_3_2_VISION.id -> OllamaModels.Granite.GRANITE_3_2_VISION
-            "gpt-oss:20b" ->
+            OllamaModels.Groq.LLAMA_3_GROK_TOOL_USE_8B.id -> {
+                OllamaModels.Groq.LLAMA_3_GROK_TOOL_USE_8B
+            }
+
+            OllamaModels.Meta.LLAMA_3_2_3B.id -> {
+                OllamaModels.Meta.LLAMA_3_2_3B
+            }
+
+            OllamaModels.Meta.LLAMA_3_2.id -> {
+                OllamaModels.Meta.LLAMA_3_2
+            }
+
+            OllamaModels.Meta.LLAMA_GUARD_3.id -> {
+                OllamaModels.Meta.LLAMA_GUARD_3
+            }
+
+            OllamaModels.Alibaba.QWEN_2_5_05B.id -> {
+                OllamaModels.Alibaba.QWEN_2_5_05B
+            }
+
+            OllamaModels.Alibaba.QWEN_3_06B.id -> {
+                OllamaModels.Alibaba.QWEN_3_06B
+            }
+
+            OllamaModels.Alibaba.QWQ_32B.id -> {
+                OllamaModels.Alibaba.QWQ_32B
+            }
+
+            OllamaModels.Alibaba.QWQ.id -> {
+                OllamaModels.Alibaba.QWQ
+            }
+
+            OllamaModels.Granite.GRANITE_3_2_VISION.id -> {
+                OllamaModels.Granite.GRANITE_3_2_VISION
+            }
+
+            "gpt-oss:20b" -> {
                 LLModel(
                     provider = LLMProvider.Ollama,
                     id = id,
@@ -78,8 +105,13 @@ open class BaseContainerTest {
                         ),
                     contextLength = 200_000,
                 )
-            "qwen2.5-coder:3b" -> OllamaModels.Alibaba.QWEN_CODER_2_5_32B.copy(id = id, contextLength = 3 * 1024)
-            "qwen3-vl:4b", "qwen2.5vl:3b", "gemma3:4b" ->
+            }
+
+            "qwen2.5-coder:3b" -> {
+                OllamaModels.Alibaba.QWEN_CODER_2_5_32B.copy(id = id, contextLength = 3 * 1024)
+            }
+
+            "qwen3-vl:4b", "qwen2.5vl:3b", "gemma3:4b" -> {
                 LLModel(
                     provider = LLMProvider.Ollama,
                     id = id,
@@ -93,7 +125,9 @@ open class BaseContainerTest {
                         ),
                     contextLength = 32 * 1024,
                 )
-            "granite3-guardian:latest" ->
+            }
+
+            "granite3-guardian:latest" -> {
                 LLModel(
                     provider = LLMProvider.Ollama,
                     id = id,
@@ -103,7 +137,11 @@ open class BaseContainerTest {
                         ),
                     contextLength = 8 * 1024,
                 )
-            else -> throw IllegalArgumentException("Model $id not found")
+            }
+
+            else -> {
+                throw IllegalArgumentException("Model $id not found")
+            }
         }
 
     protected fun waitForOllamaServer(baseUrl: String) {
