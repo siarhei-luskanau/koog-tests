@@ -2,12 +2,6 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
 }
 
-kotlin.jvmToolchain(
-    libs.versions.build.jvmTarget
-        .get()
-        .toInt(),
-)
-
 dependencies {
     implementation(libs.koog.agents.core)
     implementation(libs.koog.prompt.executor.llms.all)

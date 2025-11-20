@@ -1,6 +1,5 @@
 [versions]
 
-build-jvmTarget = "21"
 gson = "2.13.2"
 koog = "0.5.3"
 kotlin = "2.2.21"
