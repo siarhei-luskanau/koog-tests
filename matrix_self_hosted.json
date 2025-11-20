@@ -2,93 +2,114 @@
   "variants": [
     {
       "artifact-name": "Text",
-      "runs-on": "ubuntu-latest",
+      "runs-on": "self-hosted",
+      "enabled": true,
+      "ollama-model-id": "gpt-oss:20b",
+      "test-group": "KoogTextPromptTest"
+    },
+    {
+      "artifact-name": "Text",
+      "runs-on": "self-hosted",
       "enabled": true,
       "ollama-model-id": "granite3.2-vision",
       "test-group": "KoogTextPromptTest"
     },
     {
       "artifact-name": "Text",
-      "runs-on": "ubuntu-latest",
+      "runs-on": "self-hosted",
       "enabled": true,
       "ollama-model-id": "llama3.2:3b",
       "test-group": "KoogTextPromptTest"
     },
     {
       "artifact-name": "Text",
-      "runs-on": "ubuntu-latest",
+      "runs-on": "self-hosted",
       "enabled": true,
       "ollama-model-id": "llama3.2:latest",
       "test-group": "KoogTextPromptTest"
     },
     {
       "artifact-name": "Text",
-      "runs-on": "ubuntu-latest",
+      "runs-on": "self-hosted",
       "enabled": true,
       "ollama-model-id": "llama3-groq-tool-use:8b",
       "test-group": "KoogTextPromptTest"
     },
     {
       "artifact-name": "Text",
-      "runs-on": "ubuntu-latest",
+      "runs-on": "self-hosted",
       "enabled": true,
       "ollama-model-id": "qwen2.5:0.5b",
       "test-group": "KoogTextPromptTest"
     },
     {
       "artifact-name": "Text",
-      "runs-on": "ubuntu-latest",
+      "runs-on": "self-hosted",
       "enabled": true,
       "ollama-model-id": "qwen2.5-coder:3b",
       "test-group": "KoogTextPromptTest"
     },
     {
       "artifact-name": "Text",
-      "runs-on": "ubuntu-latest",
+      "runs-on": "self-hosted",
       "enabled": true,
       "ollama-model-id": "qwen3:0.6b",
       "test-group": "KoogTextPromptTest"
     },
     {
       "artifact-name": "Image",
-      "runs-on": "ubuntu-latest",
+      "runs-on": "self-hosted",
+      "enabled": true,
+      "ollama-model-id": "mistral-small3.1",
+      "test-group": "KoogImagePromptTest"
+    },
+    {
+      "artifact-name": "Image",
+      "runs-on": "self-hosted",
+      "enabled": true,
+      "ollama-model-id": "mistral-small3.2",
+      "test-group": "KoogImagePromptTest"
+    },
+    {
+      "artifact-name": "Image",
+      "runs-on": "self-hosted",
       "enabled": true,
       "ollama-model-id": "gemma3:4b",
       "test-group": "KoogImagePromptTest"
     },
     {
       "artifact-name": "Image",
-      "runs-on": "ubuntu-latest",
+      "runs-on": "self-hosted",
       "enabled": true,
       "ollama-model-id": "granite3.2-vision",
       "test-group": "KoogImagePromptTest"
     },
     {
       "artifact-name": "Image",
-      "runs-on": "ubuntu-latest",
+      "runs-on": "self-hosted",
       "enabled": true,
       "ollama-model-id": "qwen2.5vl:3b",
       "test-group": "KoogImagePromptTest"
     },
     {
       "artifact-name": "Image",
-      "runs-on": "ubuntu-latest",
+      "runs-on": "self-hosted",
       "enabled": true,
       "ollama-model-id": "qwen3-vl:4b",
       "test-group": "KoogImagePromptTest"
     },
     {
       "artifact-name": "Guard",
-      "runs-on": "ubuntu-latest",
+      "runs-on": "self-hosted",
       "enabled": true,
-      "ollama-model-id": "granite3-guardian:latest",
+      "ollama-model-id": "llama-guard3:latest",
       "test-group": "KoogGuardPromptTest"
     },
     {
       "artifact-name": "Guard",
-      "runs-on": "ubuntu-latest",
+      "runs-on": "self-hosted",
       "enabled": true,
-      "ollama-model-id": "llama-guard3:latest",
+      "ollama-model-id": "granite3-guardian:latest",
       "test-group": "KoogGuardPromptTest"
     }
   ]

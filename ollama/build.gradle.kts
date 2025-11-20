@@ -2,11 +2,13 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
 }
 
-kotlin.jvmToolchain(
-    libs.versions.build.jvmTarget
-        .get()
-        .toInt(),
-)
+kotlin {
+    jvmToolchain(
+        libs.versions.jdkVersion
+            .get()
+            .toInt(),
+    )
+}
 
 dependencies {
     implementation(libs.koog.agents.core)
@@ -26,4 +28,6 @@ dependencies {
 tasks.withType<Test> {
     systemProperty("project.root.dir", rootDir.absolutePath)
     systemProperty("ollama-model-id", System.getProperty("ollama-model-id"))
+    systemProperty("RUNNER_ENVIRONMENT", System.getProperty("RUNNER_ENVIRONMENT"))
+    systemProperty("OLLAMA_BASE_URL", System.getProperty("OLLAMA_BASE_URL"))
 }

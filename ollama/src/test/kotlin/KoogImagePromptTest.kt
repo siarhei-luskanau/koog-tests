@@ -15,7 +15,7 @@ class KoogImagePromptTest : BaseContainerTest() {
     @Test
     fun imageTest() =
         runTest(timeout = 60.minutes) {
-            val baseUrl = "http://localhost:${container.port}"
+            val baseUrl = getBaseUrl()
             println("KoogTest: wait container at $baseUrl ...")
             waitForOllamaServer(baseUrl)
 
