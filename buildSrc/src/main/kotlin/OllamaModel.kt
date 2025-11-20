@@ -1,0 +1,20 @@
+enum class OllamaModel(
+    val id: String,
+    pageUrl: String,
+) {
+    GEMMA3_4B("gemma3:4b", "https://ollama.com/library/gemma3"),
+    GPT_OSS_20B("gpt-oss:20b", "https://ollama.com/library/gpt-oss"),
+    GRANITE3_2_VISION("granite3.2-vision", "https://ollama.com/library/granite3.2-vision"),
+    GRANITE3_GUARDIAN_LATEST("granite3-guardian:latest", "https://ollama.com/library/granite3-guardian"),
+    LLAMA3_2_3B("llama3.2:3b", "https://ollama.com/library/llama3.2"),
+    LLAMA3_2_LATEST("llama3.2:latest", "https://ollama.com/library/llama3.2"),
+    LLAMA3_GROQ_TOOL_USE_8B("llama3-groq-tool-use:8b", "https://ollama.com/library/llama3-groq-tool-use"),
+    LLAMA_GUARD3_LATEST("llama-guard3:latest", "https://ollama.com/library/llama-guard3"),
+    MISTRAL_SMALL3_1("mistral-small3.1", "https://ollama.com/library/mistral-small3.1"),
+    MISTRAL_SMALL3_2("mistral-small3.2", "https://ollama.com/library/mistral-small3.2"),
+    QWEN2_5VL_3B("qwen2.5vl:3b", "https://ollama.com/library/qwen2.5vl"),
+    QWEN2_5_0_5B("qwen2.5:0.5b", "https://ollama.com/library/qwen2"),
+    QWEN2_5_CODER_3B("qwen2.5-coder:3b", "https://ollama.com/library/qwen2.5-coder"),
+    QWEN3_0_6B("qwen3:0.6b", "https://ollama.com/library/qwen3"),
+    QWEN3_VL_4B("qwen3-vl:4b", "https://ollama.com/library/qwen3-vl"),
+}

@@ -1,0 +1,14 @@
+services:
+  worker:
+    image: myoung34/github-runner:latest
+    restart: always
+    env_file:
+      - local.properties
+    environment:
+      # RUNNER_TOKEN: RUNNER_TOKEN from local.properties
+      REPO_URL: https://github.com/siarhei-luskanau/koog-tests
+      EPHEMERAL: "true"
+
+   # "host.docker.internal" resolves to your actual Mac from inside the container
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

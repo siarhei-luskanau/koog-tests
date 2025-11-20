@@ -5,6 +5,10 @@ import com.google.gson.GsonBuilder
 import org.apache.tools.ant.taskdefs.condition.Os
 import java.util.Properties
 
+println("gradle.startParameter.taskNames: ${gradle.startParameter.taskNames}")
+System.getProperties().forEach { (key, value) -> println("System.getProperties(): $key=$value") }
+System.getenv().forEach { (key, value) -> println("System.getenv(): $key=$value") }
+
 allprojects {
     apply(from = "$rootDir/ktlint.gradle")
 }
@@ -14,65 +18,88 @@ val CI_GRADLE = "CI_GRADLE"
 tasks.register("ciJobsMatrixSetup") {
     group = CI_GRADLE
     doLast {
-        val groups: List<Triple<String, String, List<String>>> =
-            listOf(
-                Triple(
-                    "Text",
-                    "KoogTextPromptTest",
-                    listOf(
-                        // "gpt-oss:20b", // https://ollama.com/library/gpt-oss
-                        "granite3.2-vision", // https://ollama.com/library/granite3.2-vision
-                        "llama3-groq-tool-use:8b", // https://ollama.com/library/llama3-groq-tool-use
-                        "llama3.2:3b", // https://ollama.com/library/llama3.2
-                        "llama3.2:latest", // https://ollama.com/library/llama3.2
-                        "qwen2.5-coder:3b", // https://ollama.com/library/qwen2.5-coder
-                        "qwen2.5:0.5b", // https://ollama.com/library/qwen2
-                        "qwen3:0.6b", // https://ollama.com/library/qwen3
-                    ),
-                ),
-                Triple(
-                    "Image",
-                    "KoogImagePromptTest",
-                    listOf(
-                        "granite3.2-vision", // https://ollama.com/library/granite3.2-vision
-                        "qwen2.5vl:3b", // https://ollama.com/library/qwen2.5vl
-                        "qwen3-vl:4b", // https://ollama.com/library/qwen3-vl
-                        "gemma3:4b", // https://ollama.com/library/gemma3
-                        // "llama3.2-vision" // https://ollama.com/library/llama3.2-vision
-                        // "llama4" // https://ollama.com/library/llama4
-                        // "mistral-small3.1" // https://ollama.com/library/mistral-small3.1
-                        // "mistral-small3.2" // https://ollama.com/library/mistral-small3.2
-                    ),
-                ),
-                Triple(
-                    "Guard",
-                    "KoogGuardPromptTest",
-                    listOf(
-                        "granite3-guardian:latest", // https://ollama.com/library/granite3-guardian
-                        "llama-guard3:latest", // https://ollama.com/library/llama-guard3
-                    ),
-                ),
-            )
-        val variants = mutableListOf<Variant>()
-        groups.forEach { (name, group, models) ->
-            models.forEach { modelId ->
+        mutableListOf<Variant>().also { variants ->
+            Models.Actions.text.forEach {
                 variants.add(
                     Variant(
-                        artifactName = name,
+                        artifactName = "Text",
                         runsOn = "ubuntu-latest",
                         enabled = true,
-                        ollamaModelId = modelId,
-                        testGroup = group,
+                        ollamaModelId = it.id,
+                        testGroup = "KoogTextPromptTest",
                     ),
                 )
             }
+            Models.Actions.image.forEach {
+                variants.add(
+                    Variant(
+                        artifactName = "Image",
+                        runsOn = "ubuntu-latest",
+                        enabled = true,
+                        ollamaModelId = it.id,
+                        testGroup = "KoogImagePromptTest",
+                    ),
+                )
+            }
+            Models.Actions.guard.forEach {
+                variants.add(
+                    Variant(
+                        artifactName = "Guard",
+                        runsOn = "ubuntu-latest",
+                        enabled = true,
+                        ollamaModelId = it.id,
+                        testGroup = "KoogGuardPromptTest",
+                    ),
+                )
+            }
+            val jsonText =
+                GsonBuilder()
+                    .apply { setPrettyPrinting() }
+                    .create()
+                    .toJson(MatrixModel(variants = variants))
+            File(rootProject.layout.projectDirectory.asFile, "matrix.json").writeText(jsonText)
         }
-        val jsonText =
-            GsonBuilder()
-                .apply { setPrettyPrinting() }
-                .create()
-                .toJson(MatrixModel(variants = variants))
-        File(rootProject.layout.projectDirectory.asFile, "matrix.json").writeText(jsonText)
+        mutableListOf<Variant>().also { variants ->
+            Models.SelfHosted.text.forEach {
+                variants.add(
+                    Variant(
+                        artifactName = "Text",
+                        runsOn = "self-hosted",
+                        enabled = true,
+                        ollamaModelId = it.id,
+                        testGroup = "KoogTextPromptTest",
+                    ),
+                )
+            }
+            Models.SelfHosted.image.forEach {
+                variants.add(
+                    Variant(
+                        artifactName = "Image",
+                        runsOn = "self-hosted",
+                        enabled = true,
+                        ollamaModelId = it.id,
+                        testGroup = "KoogImagePromptTest",
+                    ),
+                )
+            }
+            Models.SelfHosted.guard.forEach {
+                variants.add(
+                    Variant(
+                        artifactName = "Guard",
+                        runsOn = "self-hosted",
+                        enabled = true,
+                        ollamaModelId = it.id,
+                        testGroup = "KoogGuardPromptTest",
+                    ),
+                )
+            }
+            val jsonText =
+                GsonBuilder()
+                    .apply { setPrettyPrinting() }
+                    .create()
+                    .toJson(MatrixModel(variants = variants))
+            File(rootProject.layout.projectDirectory.asFile, "matrix_self_hosted.json").writeText(jsonText)
+        }
     }
 }
 

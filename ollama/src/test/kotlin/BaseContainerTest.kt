@@ -17,39 +17,54 @@ import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 
 open class BaseContainerTest {
-    protected val container by lazy {
-        OllamaContainer("ollama/ollama:latest").apply {
-            withCreateContainerCmdModifier { cmd ->
-                cmd.hostConfig?.apply {
-                    // "gpt-oss:20b" model requires 13.1GB RAM
-                    withMemory((13.3 * 1024 * 1024 * 1024).toLong()) // 13.3GB RAM
-                    val isCi =
-                        true.toString().equals(other = System.getenv("CI"), ignoreCase = true)
-                    if (isCi) {
-                        withCpuCount(2L)
-                    } else {
-                        val path =
-                            System.getProperty("project.root.dir", ".") +
-                                File.separator + ".ollama"
-                        println("Container volume: $path")
-                        withBinds(Bind(path, Volume("/root/.ollama")))
+    private val container: OllamaContainer? by lazy {
+        if (listOf(
+                System.getenv("RUNNER_ENVIRONMENT"),
+                System.getProperty("RUNNER_ENVIRONMENT"),
+            ).contains("github-hosted")
+        ) {
+            OllamaContainer("ollama/ollama:latest").apply {
+                withCreateContainerCmdModifier { cmd ->
+                    cmd.hostConfig?.apply {
+                        // "gpt-oss:20b" model requires 13.1GB RAM
+                        withMemory((13.3 * 1024 * 1024 * 1024).toLong()) // 13.3GB RAM
+                        val isCi =
+                            true.toString().equals(other = System.getenv("CI"), ignoreCase = true)
+                        if (isCi) {
+                            withCpuCount(2L)
+                        } else {
+                            val path =
+                                System.getProperty("project.root.dir", ".") +
+                                    File.separator + ".ollama"
+                            println("Container volume: $path")
+                            withBinds(Bind(path, Volume("/root/.ollama")))
+                        }
                     }
                 }
+                withImagePullPolicy(PullPolicy.alwaysPull())
+                withReuse(true)
             }
-            withImagePullPolicy(PullPolicy.alwaysPull())
-            withReuse(true)
+        } else {
+            null
         }
     }
 
     @BeforeTest
     fun start() {
-        container.start()
+        container?.start()
     }
 
     @AfterTest
     fun teardown() {
-        container.stop()
+        container?.stop()
     }
+
+    protected fun getBaseUrl(): String =
+        when {
+            container != null -> "http://localhost:${container?.port}"
+            System.getProperty("OLLAMA_BASE_URL").orEmpty().isNotEmpty() -> System.getProperty("OLLAMA_BASE_URL")
+            else -> "http://host.docker.internal:11434"
+        }
 
     protected fun findModel(id: String): LLModel =
         when (id) {
@@ -135,6 +150,26 @@ open class BaseContainerTest {
                             LLMCapability.Moderation,
                         ),
                     contextLength = 8 * 1024,
+                )
+            }
+
+            "llama3.2-vision" -> {
+                OllamaModels.Meta.LLAMA_4
+            }
+
+            "mistral-small3.1", "mistral-small3.2" -> {
+                LLModel(
+                    provider = LLMProvider.Ollama,
+                    id = id,
+                    capabilities =
+                        listOf(
+                            LLMCapability.Temperature,
+                            LLMCapability.Schema.JSON.Basic,
+                            LLMCapability.Tools,
+                            LLMCapability.Vision.Image,
+                            LLMCapability.Document,
+                        ),
+                    contextLength = 128 * 1024,
                 )
             }
 

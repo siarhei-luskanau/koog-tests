@@ -1,0 +1,34 @@
+name: Update Gradle Wrapper
+
+on:
+  workflow_dispatch:  # Manual trigger
+
+env:
+  JAVA_VERSION: 21
+  JAVA_DISTRIBUTION: 'zulu'
+
+jobs:
+
+
+  UpdateGradleWrapper:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.head_ref }}
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+          java-version: ${{ env.JAVA_VERSION }}
+
+      - uses: gradle/actions/setup-gradle@v5
+
+      - run: ./gradlew wrapper --gradle-version latest --stacktrace
+      - run: ./gradlew wrapper --gradle-version latest --stacktrace
+      - uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: Update Gradle wrapper
