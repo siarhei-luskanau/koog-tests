@@ -19,7 +19,7 @@ jobs:
       matrix: ${{ steps.set_matrix.outputs.matrix }}
     steps:
 
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - uses: actions/setup-java@v5
         with:
@@ -44,7 +44,7 @@ jobs:
     name: ${{ matrix.variants.artifact-name }} ${{ matrix.variants.ollama-model-id }} ${{ matrix.variants.runs-on }}
     steps:
 
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - uses: actions/setup-java@v5
         with:
