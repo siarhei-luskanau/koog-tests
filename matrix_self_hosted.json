@@ -74,6 +74,13 @@
       "artifact-name": "Image",
       "runs-on": "self-hosted",
       "enabled": true,
+      "ollama-model-id": "deepseek-ocr:3b",
+      "test-group": "KoogImagePromptTest"
+    },
+    {
+      "artifact-name": "Image",
+      "runs-on": "self-hosted",
+      "enabled": true,
       "ollama-model-id": "gemma3:4b",
       "test-group": "KoogImagePromptTest"
     },

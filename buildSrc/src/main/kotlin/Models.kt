@@ -12,6 +12,7 @@ object Models {
             )
         val image =
             setOf(
+                OllamaModel.DEEPSEEK_OCR_3B,
                 OllamaModel.GEMMA3_4B,
                 OllamaModel.GRANITE3_2_VISION,
                 OllamaModel.QWEN2_5VL_3B,

@@ -2,6 +2,7 @@ enum class OllamaModel(
     val id: String,
     pageUrl: String,
 ) {
+    DEEPSEEK_OCR_3B("deepseek-ocr:3b", "https://ollama.com/library/deepseek-ocr"),
     GEMMA3_4B("gemma3:4b", "https://ollama.com/library/gemma3"),
     GPT_OSS_20B("gpt-oss:20b", "https://ollama.com/library/gpt-oss"),
     GRANITE3_2_VISION("granite3.2-vision", "https://ollama.com/library/granite3.2-vision"),
