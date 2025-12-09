@@ -121,6 +121,22 @@ open class BaseContainerTest {
                 )
             }
 
+            "deepseek-ocr:3b" -> {
+                LLModel(
+                    provider = LLMProvider.Ollama,
+                    id = id,
+                    capabilities =
+                        listOf(
+                            LLMCapability.Temperature,
+                            LLMCapability.Schema.JSON.Basic,
+                            LLMCapability.Tools,
+                            LLMCapability.Vision.Image,
+                            LLMCapability.Document,
+                        ),
+                    contextLength = 8_000,
+                )
+            }
+
             "qwen2.5-coder:3b" -> {
                 OllamaModels.Alibaba.QWEN_CODER_2_5_32B.copy(id = id, contextLength = 3 * 1024)
             }
