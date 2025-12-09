@@ -15,6 +15,7 @@ object Models {
                 OllamaModel.DEEPSEEK_OCR_3B,
                 OllamaModel.GEMMA3_4B,
                 OllamaModel.GRANITE3_2_VISION,
+                OllamaModel.MINISTRAL_3_8B,
                 OllamaModel.QWEN2_5VL_3B,
                 OllamaModel.QWEN3_VL_4B,
             )

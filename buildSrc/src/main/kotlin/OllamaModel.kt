@@ -11,6 +11,7 @@ enum class OllamaModel(
     LLAMA3_2_LATEST("llama3.2:latest", "https://ollama.com/library/llama3.2"),
     LLAMA3_GROQ_TOOL_USE_8B("llama3-groq-tool-use:8b", "https://ollama.com/library/llama3-groq-tool-use"),
     LLAMA_GUARD3_LATEST("llama-guard3:latest", "https://ollama.com/library/llama-guard3"),
+    MINISTRAL_3_8B("ministral-3:8b", "https://ollama.com/library/ministral-3"),
     MISTRAL_SMALL3_1("mistral-small3.1", "https://ollama.com/library/mistral-small3.1"),
     MISTRAL_SMALL3_2("mistral-small3.2", "https://ollama.com/library/mistral-small3.2"),
     QWEN2_5VL_3B("qwen2.5vl:3b", "https://ollama.com/library/qwen2.5vl"),
