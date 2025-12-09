@@ -74,6 +74,13 @@
       "artifact-name": "Image",
       "runs-on": "ubuntu-latest",
       "enabled": true,
+      "ollama-model-id": "ministral-3:8b",
+      "test-group": "KoogImagePromptTest"
+    },
+    {
+      "artifact-name": "Image",
+      "runs-on": "ubuntu-latest",
+      "enabled": true,
       "ollama-model-id": "qwen2.5vl:3b",
       "test-group": "KoogImagePromptTest"
     },

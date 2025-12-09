@@ -113,6 +113,18 @@ open class BaseContainerTest {
                 AdditionalKoogModels.Ollama.DEEPSEEK_OCR_3B
             }
 
+            AdditionalKoogModels.Ollama.MINISTRAL_3_8B.id -> {
+                AdditionalKoogModels.Ollama.MINISTRAL_3_8B
+            }
+
+            AdditionalKoogModels.Ollama.MISTRAL_SMALL3_1.id -> {
+                AdditionalKoogModels.Ollama.MISTRAL_SMALL3_1
+            }
+
+            AdditionalKoogModels.Ollama.MISTRAL_SMALL3_2.id -> {
+                AdditionalKoogModels.Ollama.MISTRAL_SMALL3_2
+            }
+
             "qwen2.5-coder:3b" -> {
                 OllamaModels.Alibaba.QWEN_CODER_2_5_32B.copy(id = id, contextLength = 3 * 1024)
             }
@@ -147,22 +159,6 @@ open class BaseContainerTest {
 
             "llama3.2-vision" -> {
                 OllamaModels.Meta.LLAMA_4
-            }
-
-            "mistral-small3.1", "mistral-small3.2" -> {
-                LLModel(
-                    provider = LLMProvider.Ollama,
-                    id = id,
-                    capabilities =
-                        listOf(
-                            LLMCapability.Temperature,
-                            LLMCapability.Schema.JSON.Basic,
-                            LLMCapability.Tools,
-                            LLMCapability.Vision.Image,
-                            LLMCapability.Document,
-                        ),
-                    contextLength = 128 * 1024,
-                )
             }
 
             else -> {
