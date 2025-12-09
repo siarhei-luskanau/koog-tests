@@ -21,12 +21,21 @@ jobs:
 
       - uses: actions/checkout@v6
 
+      - name: Checkout koog-models
+        uses: actions/checkout@v6
+        with:
+          repository: siarhei-luskanau/koog-models
+          path: koog-models
+
       - uses: actions/setup-java@v5
         with:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
 
       - uses: gradle/actions/setup-gradle@v5
+
+      - name: Build and publish koog-models
+        run: ./gradlew -p koog-models publishToMavenLocal --stacktrace
 
       # - run: ./gradlew ciJobsMatrixSetup --stacktrace
 
@@ -46,12 +55,21 @@ jobs:
 
       - uses: actions/checkout@v6
 
+      - name: Checkout koog-models
+        uses: actions/checkout@v6
+        with:
+          repository: siarhei-luskanau/koog-models
+          path: koog-models
+
       - uses: actions/setup-java@v5
         with:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
           java-version: ${{ env.JAVA_VERSION }}
 
       - uses: gradle/actions/setup-gradle@v5
+
+      - name: Build and publish koog-models
+        run: ./gradlew -p koog-models publishToMavenLocal --stacktrace
 
       - run: ./gradlew clean :ollama:test -Dollama-model-id=${{ matrix.variants.ollama-model-id }} --tests "${{ matrix.variants.test-group }}" --stacktrace
         if: ${{ matrix.variants.enabled }}

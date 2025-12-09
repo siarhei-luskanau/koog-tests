@@ -12,6 +12,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.testcontainers.images.PullPolicy
 import org.testcontainers.ollama.OllamaContainer
+import sl.koog.models.AdditionalKoogModels
 import java.io.File
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
@@ -104,37 +105,12 @@ open class BaseContainerTest {
                 OllamaModels.Granite.GRANITE_3_2_VISION
             }
 
-            "gpt-oss:20b" -> {
-                LLModel(
-                    provider = LLMProvider.Ollama,
-                    id = id,
-                    capabilities =
-                        listOf(
-                            LLMCapability.Completion,
-                            LLMCapability.Schema.JSON.Standard,
-                            LLMCapability.Speculation,
-                            LLMCapability.Temperature,
-                            LLMCapability.ToolChoice,
-                            LLMCapability.Tools,
-                        ),
-                    contextLength = 200_000,
-                )
+            AdditionalKoogModels.Ollama.GPT_OSS_20B.id -> {
+                AdditionalKoogModels.Ollama.GPT_OSS_20B
             }
 
-            "deepseek-ocr:3b" -> {
-                LLModel(
-                    provider = LLMProvider.Ollama,
-                    id = id,
-                    capabilities =
-                        listOf(
-                            LLMCapability.Temperature,
-                            LLMCapability.Schema.JSON.Basic,
-                            LLMCapability.Tools,
-                            LLMCapability.Vision.Image,
-                            LLMCapability.Document,
-                        ),
-                    contextLength = 8_000,
-                )
+            AdditionalKoogModels.Ollama.DEEPSEEK_OCR_3B.id -> {
+                AdditionalKoogModels.Ollama.DEEPSEEK_OCR_3B
             }
 
             "qwen2.5-coder:3b" -> {
