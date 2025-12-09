@@ -29,5 +29,6 @@ dependencyResolutionManagement {
             }
         }
         mavenCentral()
+        mavenLocal()
     }
 }

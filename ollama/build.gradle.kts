@@ -11,6 +11,7 @@ kotlin {
 }
 
 dependencies {
+    implementation("sl.koog:models:0.0.1-SNAPSHOT")
     implementation(libs.koog.agents.core)
     implementation(libs.koog.prompt.executor.llms.all)
     implementation(libs.kotlinx.coroutines.core)
