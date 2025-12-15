@@ -80,7 +80,7 @@ jobs:
 
       - name: Collect reports
         if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: reports-${{ env.SANITIZED_OLLAMA_MODEL_ID }}-${{ matrix.variants.artifact-name }}-${{ matrix.variants.runs-on }}
           path: |
