@@ -125,11 +125,23 @@ open class BaseContainerTest {
                 AdditionalKoogModels.Ollama.MISTRAL_SMALL3_2
             }
 
+            "qwen3-vl:2b" -> {
+                AdditionalKoogModels.Ollama.QWEN3_VL_2B
+            }
+
+            "qwen3-vl:4b" -> {
+                AdditionalKoogModels.Ollama.QWEN3_VL_4B
+            }
+
+            "qwen3-vl:8b" -> {
+                AdditionalKoogModels.Ollama.QWEN3_VL_8B
+            }
+
             "qwen2.5-coder:3b" -> {
                 OllamaModels.Alibaba.QWEN_CODER_2_5_32B.copy(id = id, contextLength = 3 * 1024)
             }
 
-            "qwen3-vl:4b", "qwen2.5vl:3b", "gemma3:4b" -> {
+            "qwen2.5vl:3b", "gemma3:4b" -> {
                 LLModel(
                     provider = LLMProvider.Ollama,
                     id = id,

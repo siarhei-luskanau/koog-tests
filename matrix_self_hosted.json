@@ -109,7 +109,21 @@
       "artifact-name": "Image",
       "runs-on": "self-hosted",
       "enabled": true,
+      "ollama-model-id": "qwen3-vl:2b",
+      "test-group": "KoogImagePromptTest"
+    },
+    {
+      "artifact-name": "Image",
+      "runs-on": "self-hosted",
+      "enabled": true,
       "ollama-model-id": "qwen3-vl:4b",
+      "test-group": "KoogImagePromptTest"
+    },
+    {
+      "artifact-name": "Image",
+      "runs-on": "self-hosted",
+      "enabled": true,
+      "ollama-model-id": "qwen3-vl:8b",
       "test-group": "KoogImagePromptTest"
     },
     {
