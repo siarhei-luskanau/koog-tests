@@ -18,5 +18,7 @@ enum class OllamaModel(
     QWEN2_5_0_5B("qwen2.5:0.5b", "https://ollama.com/library/qwen2"),
     QWEN2_5_CODER_3B("qwen2.5-coder:3b", "https://ollama.com/library/qwen2.5-coder"),
     QWEN3_0_6B("qwen3:0.6b", "https://ollama.com/library/qwen3"),
+    QWEN3_VL_2B("qwen3-vl:2b", "https://ollama.com/library/qwen3-vl"),
     QWEN3_VL_4B("qwen3-vl:4b", "https://ollama.com/library/qwen3-vl"),
+    QWEN3_VL_8B("qwen3-vl:8b", "https://ollama.com/library/qwen3-vl"),
 }

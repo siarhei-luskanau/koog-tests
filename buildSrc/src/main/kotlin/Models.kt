@@ -17,7 +17,9 @@ object Models {
                 OllamaModel.GRANITE3_2_VISION,
                 OllamaModel.MINISTRAL_3_8B,
                 OllamaModel.QWEN2_5VL_3B,
+                OllamaModel.QWEN3_VL_2B,
                 OllamaModel.QWEN3_VL_4B,
+                OllamaModel.QWEN3_VL_8B,
             )
         val guard =
             setOf(
