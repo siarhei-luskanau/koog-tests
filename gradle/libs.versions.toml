@@ -2,7 +2,7 @@
 
 gson = "2.13.2"
 jdkVersion = "21"
-koog = "0.5.4"
+koog = "0.6.0"
 kotlin = "2.3.0"
 kotlinx-coroutines = "1.10.2"
 kotlinx-datetime = "0.7.1-0.6.x-compat"
