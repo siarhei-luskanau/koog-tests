@@ -1,7 +1,7 @@
+import ai.koog.prompt.executor.ollama.client.OllamaModels
 import ai.koog.prompt.llm.LLMCapability
 import ai.koog.prompt.llm.LLMProvider
 import ai.koog.prompt.llm.LLModel
-import ai.koog.prompt.llm.OllamaModels
 import com.github.dockerjava.api.model.Bind
 import com.github.dockerjava.api.model.Volume
 import io.ktor.client.HttpClient
