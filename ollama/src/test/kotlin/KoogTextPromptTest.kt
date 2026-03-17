@@ -1,5 +1,5 @@
 import ai.koog.prompt.dsl.prompt
-import ai.koog.prompt.executor.llms.SingleLLMPromptExecutor
+import ai.koog.prompt.executor.llms.MultiLLMPromptExecutor
 import ai.koog.prompt.executor.ollama.client.OllamaClient
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
@@ -24,7 +24,7 @@ class KoogTextPromptTest : BaseContainerTest() {
             val llmClient = OllamaClient(baseUrl = baseUrl)
             llmClient.getModelOrNull(model.id, pullIfMissing = true)
 
-            val promptExecutor = SingleLLMPromptExecutor(llmClient)
+            val promptExecutor = MultiLLMPromptExecutor(llmClient)
             val prompt =
                 prompt(id = Uuid.random().toString()) {
                     system(content = "You are a helpful assistant.")
