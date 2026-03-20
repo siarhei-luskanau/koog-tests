@@ -1,4 +1,4 @@
-rootProject.name = "KoogTests"
+rootProject.name = "koog-tests"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":ollama")
