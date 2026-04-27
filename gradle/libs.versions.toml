@@ -1,6 +1,6 @@
 [versions]
 
-gson = "2.13.2"
+gson = "2.14.0"
 jdkVersion = "21"
 koog = "0.8.0"
 kotlin = "2.3.21"
