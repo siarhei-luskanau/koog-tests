@@ -105,8 +105,8 @@ open class BaseContainerTest {
                 OllamaModels.Granite.GRANITE_3_2_VISION
             }
 
-            AdditionalKoogModels.Ollama.GPT_OSS_20B.id -> {
-                AdditionalKoogModels.Ollama.GPT_OSS_20B
+            OllamaModels.OpenAI.GPT_OSS_20B.id -> {
+                OllamaModels.OpenAI.GPT_OSS_20B
             }
 
             AdditionalKoogModels.Ollama.DEEPSEEK_OCR_3B.id -> {
