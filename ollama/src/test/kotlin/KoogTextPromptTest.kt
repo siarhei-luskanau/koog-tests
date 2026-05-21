@@ -1,9 +1,11 @@
 import ai.koog.prompt.dsl.prompt
 import ai.koog.prompt.executor.llms.MultiLLMPromptExecutor
 import ai.koog.prompt.executor.ollama.client.OllamaClient
+import ai.koog.prompt.message.MessagePart
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertContains
+import kotlin.test.assertTrue
 import kotlin.time.Duration.Companion.minutes
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
@@ -34,14 +36,27 @@ class KoogTextPromptTest : BaseContainerTest() {
                 }
 
             println("KoogTest: execute agent prompt: $prompt")
-            val response = promptExecutor.execute(prompt = prompt, model = model).single()
+            val response = promptExecutor.execute(prompt = prompt, model = model)
             println("KoogTest: agent response: $response")
 
-            assertContains(
-                response.content,
-                other = "Paris",
-                ignoreCase = true,
-                message = "Result should contain Paris",
+            assertTrue(
+                actual = response.parts.isNotEmpty(),
+                message = "Result should contain parts",
             )
+
+            response.parts.forEach { part ->
+                when (part) {
+                    is MessagePart.Text -> {
+                        assertContains(
+                            part.text,
+                            other = "Paris",
+                            ignoreCase = true,
+                            message = "Result should contain Paris",
+                        )
+                    }
+
+                    else -> {}
+                }
+            }
         }
 }
