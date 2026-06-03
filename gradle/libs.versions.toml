@@ -3,7 +3,7 @@
 gson = "2.14.0"
 jdkVersion = "21"
 koog = "1.0.0"
-kotlin = "2.3.21"
+kotlin = "2.4.0"
 kotlinx-coroutines = "1.11.0"
 ktlint = "1.8.0"
 ktor = "3.5.0"
