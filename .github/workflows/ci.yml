@@ -14,10 +14,10 @@ jobs:
       matrix: ${{ steps.set_matrix.outputs.matrix }}
     steps:
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Checkout koog-models
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: siarhei-luskanau/koog-models
           path: koog-models
@@ -48,10 +48,10 @@ jobs:
     name: ${{ matrix.variants.artifact-name }} ${{ matrix.variants.ollama-model-id }} ${{ matrix.variants.runs-on }}
     steps:
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Checkout koog-models
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: siarhei-luskanau/koog-models
           path: koog-models
